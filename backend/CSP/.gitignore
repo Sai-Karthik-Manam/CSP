@@ -1,0 +1,90 @@
+
+# Build outputs
+[Bb]in/
+[Oo]bj/
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Aa]rtifacts/
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Visual Studio Code
+.vscode/
+
+# Rider / JetBrains
+.idea/
+*.sln.iml
+
+# NuGet
+*.nupkg
+**/packages/*
+!**/packages/build/
+
+# Logs
+*.log
+logs/
+
+# Local environment variables
+.env
+.env.*
+!.env.example
+
+# Local configuration and secrets
+appsettings.Local.json
+appsettings.*.Local.json
+secrets.json
+
+# User Secrets should remain outside the repository
+# Keep appsettings.Development.json and
+# appsettings.Production.json committed only
+# when they contain no secrets.
+
+# Uploaded files
+Uploads/
+uploads/
+wwwroot/uploads/
+wwwroot/Uploads/
+
+# User profile photos (if stored in a dedicated folder)
+UserImages/
+UserImages/**
+
+# Test results and coverage
+TestResults/
+coverage/
+*.coverage
+*.coveragexml
+
+# OS files
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*.swp
+
+# Publish output
+publish/
+**/publish/
+
+# Certificates and private keys
+*.pfx
+*.p12
+*.key
+*.pem
+
+
+
+# Ignore local configuration containing secrets
+appsettings.Local.json
+appsettings.*.Local.json
