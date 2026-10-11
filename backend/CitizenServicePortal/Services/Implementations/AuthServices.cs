@@ -20,44 +20,58 @@ public class AuthServices : IAuthServices
         string passwordHash =BCrypt.Net.BCrypt.HashPassword(model.Password);
         return await _userRepository.RegistrationAsync(model,passwordHash,fileName,createdBy);
     }
+   
     public async Task<LoginResponseModel> LoginAsync(LoginModel model)
     {
         if (string.IsNullOrWhiteSpace(model.Email))
         {
             return new LoginResponseModel
             {
-              Flag=0,
-              Message="Please Enter Email"  
+                Flag = 0,
+                Message = "Please enter email"
             };
         }
+
         if (string.IsNullOrWhiteSpace(model.Password))
         {
             return new LoginResponseModel
             {
-              Flag=0,
-              Message="Please Enter Password"  
+                Flag = 0,
+                Message = "Please enter password"
             };
         }
-        var user=await _userRepository.LoginAsync(model);
+
+        var user = await _userRepository.LoginAsync(model);
+
         if (user == null)
         {
             return new LoginResponseModel
             {
-                Flag=0,
-                Message="Invalid Email"
+                Flag = 0,
+                Message = "Invalid email or password"
             };
         }
-        bool isValidPassword = BCrypt.Net.BCrypt.Verify(model.Password, user.Password);
+
+        bool isValidPassword =
+            BCrypt.Net.BCrypt.Verify(model.Password, user.Password);
+
         if (!isValidPassword)
         {
             return new LoginResponseModel
             {
-                Flag=0,
-                Message="Password doesn't match"
-            };  
+                Flag = 0,
+                Message = "Invalid email or password"
+            };
         }
-        user.Flag=1;
-        user.Message="Login Successfull";
-        return user;
+
+        return new LoginResponseModel
+        {
+            Id = user.Id,
+            UserName = user.UserName,
+            CitizenID = user.CitizenID,
+            Role = user.Role,
+            Flag = 1,
+            Message = "Login successful"
+        };
     }
 }

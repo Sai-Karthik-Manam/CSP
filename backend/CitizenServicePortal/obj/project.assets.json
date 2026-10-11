@@ -1713,11 +1713,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "F:\\PROJECTS\\CSP\\backend\\CitizenServicePortal\\CitizenServicePortal\\CitizenServicePortal.csproj",
+      "projectUniqueName": "F:\\PROJECTS\\CSP\\backend\\CitizenServicePortal\\CitizenServicePortal.csproj",
       "projectName": "CitizenServicePortal",
-      "projectPath": "F:\\PROJECTS\\CSP\\backend\\CitizenServicePortal\\CitizenServicePortal\\CitizenServicePortal.csproj",
+      "projectPath": "F:\\PROJECTS\\CSP\\backend\\CitizenServicePortal\\CitizenServicePortal.csproj",
       "packagesPath": "C:\\Users\\Lenovo\\.nuget\\packages\\",
-      "outputPath": "F:\\PROJECTS\\CSP\\backend\\CitizenServicePortal\\CitizenServicePortal\\obj\\",
+      "outputPath": "F:\\PROJECTS\\CSP\\backend\\CitizenServicePortal\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

@@ -39,14 +39,13 @@ public class UserRepository : IUserRepository
         var result =await conn.QuerySingleAsync<DBResponse>("User_Registration",parameters,commandType: CommandType.StoredProcedure);
         return result;
     }
-    public async Task<LoginResponseModel> LoginAsync(LoginModel model)
+    public async Task<LoginUserData> LoginAsync(LoginModel model)
     {
         using var conn=CreateConnection();
         var parameters = new
         {
             model.Email
         };
-        var result=await conn.QuerySingleAsync<LoginResponseModel>("User_Login",parameters,commandType:CommandType.StoredProcedure);
-        return result;
+        return await conn.QuerySingleAsync<LoginUserData>("User_Login",parameters,commandType:CommandType.StoredProcedure);
     }
 }
