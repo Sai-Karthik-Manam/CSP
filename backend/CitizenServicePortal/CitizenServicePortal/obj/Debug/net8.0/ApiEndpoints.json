@@ -1,0 +1,58 @@
+[
+  {
+    "ContainingType": "CSP.API.Controllers.AuthController",
+    "Method": "Registration",
+    "RelativePath": "api/Auth/Registration",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Name",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Email",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "MobileNumber",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "DOB",
+        "Type": "System.DateTime",
+        "IsRequired": false
+      },
+      {
+        "Name": "Password",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Image",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      },
+      {
+        "Name": "Photo",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CSP.API.Controllers.ServiceController",
+    "Method": "GetServices",
+    "RelativePath": "api/Service",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  }
+]
