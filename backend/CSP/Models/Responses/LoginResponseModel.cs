@@ -7,4 +7,5 @@ public class LoginResponseModel
     public int Role{get;set;}
     public int Flag{get;set;}
     public string Message{get;set;}=string.Empty;
+    public string Token { get; set; } = string.Empty;
 }

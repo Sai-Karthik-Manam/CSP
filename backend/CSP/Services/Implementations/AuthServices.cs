@@ -9,10 +9,12 @@ namespace CSP.API.Services.Implementations;
 public class AuthServices : IAuthServices
 {
     private readonly IUserRepository _userRepository;
+    private readonly ITokenService _tokenService;
 
-    public AuthServices(IUserRepository userRepository)
+    public AuthServices(IUserRepository userRepository,ITokenService tokenService)
     {
         _userRepository = userRepository;
+        _tokenService=tokenService;
     }
 
     public async Task<DBResponse> RegistrationAsync(RegistrationModel model,string fileName,string createdBy)
@@ -71,7 +73,8 @@ public class AuthServices : IAuthServices
             CitizenID = user.CitizenID,
             Role = user.Role,
             Flag = 1,
-            Message = "Login successful"
+            Message = "Login successful",
+            Token = _tokenService.GenerateToken(user.Id,user.UserName,user.CitizenID,user.Role)
         };
     }
 }
