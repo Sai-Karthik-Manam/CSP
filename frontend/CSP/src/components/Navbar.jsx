@@ -1,7 +1,14 @@
-import {Link} from 'react-router-dom';
+import {Link,useNavigate} from 'react-router-dom';
 import {useState} from 'react';
 function Navbar(){
     const [menuOpen,setMenuOpen]=useState(false);
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+        localStorage.removeItem("isAuthenticated");
+        setMenuOpen(false);
+        navigate("/");
+    };
     const toggleMenu=()=>{
         setMenuOpen(!menuOpen);
     };
@@ -17,10 +24,17 @@ function Navbar(){
                 </Link>
 
                 <nav className="desktop-nav">
-                    <Link to="/">Home</Link>
+                    {localStorage.getItem("isAuthenticated") === "true" && (
+                        <Link to="/">Home</Link>
+                    )}
                     <Link to="/services">Services</Link>
-                    <Link to="/login">Login</Link>
                     <Link to="/register" className="nav-register">Register</Link>
+                    {localStorage.getItem("isAuthenticated") === "false" && (
+                        <Link to="/login">Login</Link>
+                    )}
+                    {localStorage.getItem("isAuthenticated") === "true" && (
+                        <Link onClick={handleLogout}>Logout</Link>
+                    )}
                 </nav>
 
                 {/* Mobile Menu Button */}

@@ -29,6 +29,8 @@ builder.Services.AddCors(options =>
 
 
 builder.Services.AddScoped<ITokenService, TokenService>();
+builder.Services.AddScoped<IServiceRepository, ServiceRepository>();
+builder.Services.AddScoped<IService, Service>();
 
 var jwtKey = builder.Configuration["Jwt:Key"]
     ?? throw new InvalidOperationException(
@@ -73,6 +75,7 @@ if (app.Environment.IsDevelopment())
 
 // app.UseHttpsRedirection();
 app.UseCors("React");
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

@@ -32,6 +32,8 @@ function Login(){
             setIsSubmitting(true);
             const result= await LoginUser(data);
             if(result.flag===1){
+                localStorage.setItem("token", result.token);
+                localStorage.setItem("isAuthenticated", "true");
                 alert(`${result.message}`);
                 navigate("/Home");
             }
@@ -58,7 +60,7 @@ function Login(){
                         <form onSubmit={handleSubmit}>
                             <div className="form-group">
                                 <label htmlFor="email">Email</label>
-                                <input type="email" value={email} onChange={(event=>setEmail(event.target.value))}/>
+                                <input id="email" type="email" value={email} onChange={(event=>setEmail(event.target.value))}/>
                                 {error.email && (
                                     <p className="field-error">
                                         {error.email}
@@ -67,7 +69,7 @@ function Login(){
                             </div>
                             <div className="form-group">
                                 <label htmlFor="password">Password</label>
-                                <input type="password" value={password} onChange={(event=>setPassword(event.target.value))}/>
+                                <input id="password" type="password" value={password} onChange={(event=>setPassword(event.target.value))}/>
                                 {error.password && (
                                     <p className="field-error">
                                         {error.password}

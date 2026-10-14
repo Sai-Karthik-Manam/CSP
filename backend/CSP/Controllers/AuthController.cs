@@ -8,11 +8,13 @@ namespace CSP.API.Controllers;
 public class AuthController : ControllerBase
 {
     private readonly IConfiguration _configuration;
+    private readonly ITokenService _tokenService;
     private readonly IAuthServices _authServices;
-    public AuthController(IConfiguration configuration,IAuthServices authServices)
+    public AuthController(IConfiguration configuration,IAuthServices authServices,ITokenService tokenService)
     {
         _configuration=configuration;
         _authServices=authServices;
+        _tokenService=tokenService;
     }
     [HttpPost("Registration")]
     public async Task<IActionResult> Registration(RegistrationModel model){
@@ -58,7 +60,33 @@ public class AuthController : ControllerBase
         {
             return BadRequest(model);
         }
-        var result=await _authServices.LoginAsync(model);
-        return Ok(result);
+       var result = await _authServices.LoginAsync(model);
+
+        if (result.Flag != 1)
+        {
+            return Unauthorized(new
+            {
+                result.Flag,
+                result.Message
+            });
+        }
+
+        var token = _tokenService.GenerateToken(
+            result.Id,
+            result.UserName,
+            result.CitizenID,
+            result.Role
+        );
+
+        return Ok(new
+        {
+            result.Id,
+            result.UserName,
+            result.CitizenID,
+            result.Role,
+            result.Flag,
+            result.Message,
+            Token = token
+        });
     }
 }

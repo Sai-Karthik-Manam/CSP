@@ -1,6 +1,27 @@
+import { useEffect, useState } from "react";
 import ServiceCard from "./ServiceCard";
+import { GetServices } from "../services/services";
 
 function PopularServices() {
+    const [services, setServices] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState("");
+
+    useEffect(() => {
+        const fetchServices = async () => {
+            try {
+                const data = await GetServices();
+                setServices(data);
+            } catch(error) {
+                setError("Unable to load services.");
+                console.log(error);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchServices();
+    }, []);
     return (
         <section className="popular-services">
             <div className="section-heading">
@@ -14,22 +35,22 @@ function PopularServices() {
 
             <div className="services-grid">
 
-                <ServiceCard icon="📄" 
-                title="Certificates"
-                description="Apply for and manage important government certificates."
-                />
+                {loading && <p>Loading services...</p>}
 
-                <ServiceCard
-                    icon="🪪"
-                    title="Identity Services"
-                    description="Access identity-related citizen services and applications."
-                />
+                {error && <p className="field-error">{error}</p>}
 
-                <ServiceCard
-                    icon="📋"
-                    title="Applications"
-                    description="Submit applications and track their current status."
-                />
+                {!loading && !error && services.length === 0 && (
+                    <p>No services available.</p>
+                )}
+
+                {!loading && !error && services.map((service) => (
+                    <ServiceCard
+                        key={service.id}
+                        icon="📄"
+                        title={service.serviceName}
+                        description={`Access ${service.serviceName} services online.`}
+                    />
+                ))}
             </div>
         </section>
     );

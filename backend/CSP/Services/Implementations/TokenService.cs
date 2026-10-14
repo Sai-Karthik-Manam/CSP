@@ -19,11 +19,9 @@ public class TokenService : ITokenService
     {
         var key = _configuration["Jwt:Key"];
 
-        if (string.IsNullOrWhiteSpace(key) ||
-            Encoding.UTF8.GetByteCount(key) < 32)
+        if (string.IsNullOrWhiteSpace(key) || Encoding.UTF8.GetByteCount(key) < 32)
         {
-            throw new InvalidOperationException(
-                "JWT signing key must be configured with at least 32 bytes.");
+            throw new InvalidOperationException("JWT signing key must be configured with at least 32 bytes.");
         }
 
         var claims = new[]
